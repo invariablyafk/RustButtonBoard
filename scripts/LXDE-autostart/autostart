@@ -1,0 +1,6 @@
+This was copied to /etc/xdg/lxsession/LXDE-pi/autostart
+for the button board service, lxpanel was causing 
+insane resource hogging and this removes that issue.
+@lxterminal
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash

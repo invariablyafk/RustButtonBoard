@@ -1,0 +1,18 @@
+[Unit]
+Description=Button Board
+After=sound.target syslog.target network.target multi-user.target display-manager.service
+
+[Service]
+ExecStart=/home/pi/button-board/rust-speech-board
+WorkingDirectory=/home/pi/button-board
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+RestartSec=60
+User=pi
+Environment=DISPLAY=:0
+Type=simple
+
+
+[Install]
+WantedBy=default.target

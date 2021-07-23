@@ -1,55 +1,20 @@
-#![warn(unused_imports)]
-
 use gilrs::{Gilrs, Event};
 use rodio::{Decoder, OutputStream, Sink};
 use std::collections::HashMap;
 use std::path::Path;
 use serde_json::{Result, Value};
+use std::fs::File;
+use std::io::Read;
 
-
-
-// words = {
-//     "48" : {"word" : "Zulu",    "sound": None},
-//     "49" : {"word" : 'Look',    "sound": None},
-//     "50" : {"word" : 'Allen',   "sound": None},
-//     "51" : {"word" : 'Goodbye' ,    "sound": None}, 
-//     "52" : {"word" : 'Tal' ,    "sound": None}, 
-
-//     "53" : {"word" : 'Happy',    "sound": None},     
-//     "54" : {"word" : 'Love',     "sound": None}, 
-//     "55" : {"word" : 'Good',   "sound": None},
-//     "56" : {"word" : 'Hurt',      "sound": None},
-//     "57" : {"word" : 'Come',      "sound": None},
-//     "58" : {"word" : 'Want',      "sound": None},
-//     "59" : {"word" : 'Go',        "sound": None},
-    
-//     "60" : {"word" : 'Bed',       "sound": None},
-//     "61" : {"word" : 'Yes',       "sound": None},
-//     "62" : {"word" : 'Potty',     "sound": None},
-//     "63" : {"word" : 'No',        "sound": None},
-//     "64" : {"word" : "Food",      "sound": None},   
-               
-//     "65" : {"word" : 'Water',    "sound": None},
-//     "66" : {"word" : 'Later',    "sound": None},
-//     "67" : {"word" : 'Outside',  "sound": None},
-//     "68" : {"word" : 'Now',      "sound": None},
-//     "69" : {"word" : 'Home',     "sound": None},
-//     "70" : {"word" : 'Play',     "sound": None},
-//     "71" : {"word" : 'Walk',     "sound": None},
-    
-//     "72" : {"word" : 'Treat',    "sound": None}
-
-// }
-
-
-fn get_filename(button_name: &str, joystick_id: gilrs::GamepadId, vocabulary: &mut HashMap<String, &str>) -> String {
+fn get_filename(button_name: &str, joystick_id: gilrs::GamepadId, vocabulary: &mut HashMap<String, String>) -> String {
     let mut key = String::from("Joystick");
     key.push_str( joystick_id.to_string().as_str() );
     key.push_str("-");
     key.push_str(button_name);
-    println!("{}", key);
+    
     
     if vocabulary.contains_key(key.as_str()){ 
+        println!("Playing: {}", vocabulary.get(&key).unwrap().to_string());
         return vocabulary.get(&key).unwrap().to_string();
     } else {
         return String::from("");
@@ -58,48 +23,31 @@ fn get_filename(button_name: &str, joystick_id: gilrs::GamepadId, vocabulary: &m
 
 fn main() -> Result<()> {
 
-    // Some JSON input data as a &str. Maybe this comes from the user.
-    let data = r#"[
-        {
-            "button": "Joystick1-RightTrigger",
-            "file": "../dog_words/Alex/Zulu-200.wav"
-        },
-        {
-            "button": "Joystick0-RightTrigger",
-            "file": "../dog_words/Alex/Allen-200.wav"
-        },
-        {
-            "button": "Joystick0-LeftTrigger2",
-            "file": "../dog_words/Alex/Allen-200.wav"
-        }]"#;
+    println!("Loading vocabulary..");
 
-    // // Parse the string of data into serde_json::Value.
-    let wordsMap: Vec<Value> = serde_json::from_str(data)?;
+    let mut file = File::open("words.json").expect("Unable to open words.json");
+    let mut contents = String::new();
+    file.read_to_string(&mut contents).expect("Unable to open words.json"); //.ok();
 
-    // // Access parts of the data by indexing with square brackets.
-    
 
-    let mut vocabulary: HashMap<String, &str> = HashMap::new();
+    // Parse the string of data into serde_json::Value.
+    let words_map: Vec<Value> = serde_json::from_str(&contents)?;
 
-    for word in wordsMap {
-        // vocabulary.insert(word["button"].to_string(),word["file"].to_string());
-        println!("{} --> {}", word["button"], word["file"]);
-        vocabulary.insert(word["button"].to_string(),"../dog_words/Alex/Zulu-200.wav");
+    // Create hash Map to hold the word<->file mapping.
+    let mut vocabulary: HashMap<String, String> = HashMap::new();
+
+    for word in words_map {
+        println!("Added word: {} --> {}", word["button"], word["file"]);
+        vocabulary.insert(String::from(word["button"].as_str().unwrap()), String::from(word["file"].as_str().unwrap()));
     }
-
-    vocabulary.insert(String::from("Joystick1-RightTrigger"),"../dog_words/Alex/Zulu-200.wav");
-
-    
-    
-    
-
 
     // Gamepad Setup?
     let mut gilrs = Gilrs::new().unwrap();
 
     // Iterate over all connected gamepads
+    println!("Found the following gamepads:");
     for (_id, gamepad) in gilrs.gamepads() {
-        println!("{} is {:?}", gamepad.name(), gamepad.power_info());
+        println!("\t{}: {} is {:?}", _id, gamepad.name(), gamepad.power_info());
     }
 
     loop {
@@ -114,8 +62,26 @@ fn main() -> Result<()> {
                 gilrs::EventType::ButtonPressed(button_code, _) => {
                     
                     let file_name = match button_code {
-                        gilrs::Button::RightTrigger => get_filename("RightTrigger", id, &mut vocabulary),
-                        _ => String::from(""),
+                        gilrs::Button::South         => get_filename("South", id, &mut vocabulary),
+                        gilrs::Button::East          => get_filename("East", id, &mut vocabulary),
+                        gilrs::Button::North         => get_filename("North", id, &mut vocabulary),
+                        gilrs::Button::West          => get_filename("West", id, &mut vocabulary),
+                        gilrs::Button::C             => get_filename("C", id, &mut vocabulary),
+                        gilrs::Button::Z             => get_filename("Z", id, &mut vocabulary),
+                        gilrs::Button::LeftTrigger   => get_filename("LeftTrigger", id, &mut vocabulary),
+                        gilrs::Button::LeftTrigger2  => get_filename("LeftTrigger2", id, &mut vocabulary),
+                        gilrs::Button::RightTrigger  => get_filename("RightTrigger", id, &mut vocabulary),
+                        gilrs::Button::RightTrigger2 => get_filename("RightTrigger2", id, &mut vocabulary),
+                        gilrs::Button::Select        => get_filename("Select", id, &mut vocabulary),
+                        gilrs::Button::Start         => get_filename("Start", id, &mut vocabulary),
+                        gilrs::Button::Mode          => get_filename("Mode", id, &mut vocabulary),
+                        gilrs::Button::LeftThumb     => get_filename("LeftThumb", id, &mut vocabulary),
+                        gilrs::Button::RightThumb    => get_filename("RightThumb", id, &mut vocabulary),
+                        gilrs::Button::DPadUp        => get_filename("DPadUp", id, &mut vocabulary),
+                        gilrs::Button::DPadDown      => get_filename("DPadDown", id, &mut vocabulary),
+                        gilrs::Button::DPadLeft      => get_filename("DPadLeft", id, &mut vocabulary),
+                        gilrs::Button::DPadRight     => get_filename("DPadRight", id, &mut vocabulary),
+                        gilrs::Button::Unknown       => get_filename("Unknown", id, &mut vocabulary),
                     };
 
                     if file_name != "" {
@@ -124,9 +90,11 @@ fn main() -> Result<()> {
                             let file = std::fs::File::open(&file_path).unwrap();
                             let source = Decoder::new(file).unwrap();
                             sink.append(source);
+                        } else {
+                            println!("Joystick{}-{:?} file not found: {}", id, button_code, file_name);
                         }
                     } else {
-                        println!("No Mapping for Joystick {}: {:?}", id, button_code);
+                        println!("No Mapping for Joystick{}-{:?}", id, button_code);
                     }
 
                 },
