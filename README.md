@@ -9,7 +9,7 @@ The software runs as a simple service in the background on a Raspberry Pi Deskto
 
 Installation:
 
-The below install script assumes you are installing on a fresh Raspberry Pi Desktop OS with nothing else. It will enable filesharing for the `pi` user, and SSH for  management over WiFi. The audio is sent out the headphone jack.
+The below install script assumes you are installing on a fresh Raspberry Pi Desktop OS with nothing else. It will enable filesharing for the `pi` user over WiFi. The audio is sent out the headphone jack.
 
    1. Download software to the `pi` user home folder.
    2. Change to RustButtonBoard directory: `cd /home/pi/RustbuttonBoard`
