@@ -1,6 +1,9 @@
 
-Inspired by the Christina Hunger's work to use an AAC button board to teach her dog to talk. (https://hungerforwords.com) This software plays audio clips based on buttons pressed. It runs as a simple service in the background on a Raspberry Pi Desktop. The Raspberry Pi interfaces with the buttons using two ( or more) USB "Zero-Delay" arcade button controllers for a total of 24+ buttons on one sound board.
+Inspired by the Christina Hunger's work to use an AAC button board to teach her dog to talk. (https://hungerforwords.com) This software plays audio clips based on buttons pressed. 
 
+The commonly used buttons by Christina and others are prone to breaking, have poor sound quality, poor volume, and require battery changes. This software and associated hardware setup allows a more compact and portable design that is ideal for cats and smaller dogs. 
+
+The software runs as a simple service in the background on a Raspberry Pi Desktop. The Raspberry Pi interfaces with the buttons using two (or more) USB "Zero-Delay" arcade button controllers for a total of 24+ buttons on one sound board. Additional button controllers, and buttons, are possible but have not be tested. 
 
 ![Button Board Prototype](images/board-front.jpg?raw=true "Button Board Prototype")
 
