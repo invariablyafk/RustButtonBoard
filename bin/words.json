@@ -1,19 +1,19 @@
 [
       {
         "button": "Joystick0-South",
-        "file": "vocabulary/Alex/Allen-200.wav"
+        "file": "vocabulary/Alex/Love-200.wav"
       },
       {
         "button": "Joystick0-East",
-        "file": "vocabulary/Alex/Good-200.wav"
+        "file": "vocabulary/Alex/Want-200.wav"
       },
       {
         "button": "Joystick0-North",
-        "file": "vocabulary/Alex/Love you-200.wav"
+        "file": "vocabulary/Alex/Fetch-200.wav"
       },
       {
         "button": "Joystick0-West",
-        "file": "vocabulary/Alex/Tal-200.wav"
+        "file": "vocabulary/Alex/Bye-200.wav"
       },
       {
         "button": "Joystick0-C",
@@ -25,27 +25,27 @@
       },
       {
         "button": "Joystick0-LeftTrigger",
-        "file": "vocabulary/Alex/Mad-200.wav"
+        "file": "vocabulary/Alex/Walk-200.wav"
       },
       {
         "button": "Joystick0-LeftTrigger2",
-        "file": "vocabulary/Alex/Treat-200.wav"
+        "file": "vocabulary/Alex/Now-200.wav"
       },
       {
         "button": "Joystick0-RightTrigger",
-        "file": "vocabulary/Alex/Bed-200.wav"
+        "file": "vocabulary/Alex/Water-200.wav"
       },
       {
         "button": "Joystick0-RightTrigger2",
-        "file": "vocabulary/Alex/Happy-200.wav"
+        "file": "vocabulary/Alex/Treat-200.wav"
       },
       {
         "button": "Joystick0-Select",
-        "file": "vocabulary/Alex/No-200.wav"
+        "file": "vocabulary/Alex/Later-200.wav"
       },
       {
         "button": "Joystick0-Start",
-        "file": "vocabulary/Alex/Walk-200.wav"
+        "file": "vocabulary/Alex/Hurt-200.wav"
       },
       {
         "button": "Joystick0-Mode",
@@ -53,11 +53,11 @@
       },
       {
         "button": "Joystick0-LeftThumb",
-        "file": "vocabulary/Alex/Hello-200.wav"
+        "file": "vocabulary/Alex/No-200.wav"
       },
       {
         "button": "Joystick0-RightThumb",
-        "file": "vocabulary/Alex/Now-200.wav"
+        "file": "vocabulary/Alex/Look-200.wav"
       },
       {
         "button": "Joystick0-DPadUp",
@@ -81,19 +81,19 @@
       },
       {
         "button": "Joystick1-South",
-        "file": "vocabulary/Alex/Water-200.wav"
+        "file": "vocabulary/Alex/Good-200.wav"
       },
       {
         "button": "Joystick1-East",
-        "file": "vocabulary/Alex/Come-200.wav"
+        "file": "vocabulary/Alex/Yes-200.wav"
       },
       {
         "button": "Joystick1-North",
-        "file": "vocabulary/Alex/Home-200.wav"
+        "file": "vocabulary/Alex/Allen-200.wav"
       },
       {
         "button": "Joystick1-West",
-        "file": "vocabulary/Alex/Outside-200.wav"
+        "file": "vocabulary/Alex/Go-200.wav"
       },
       {
         "button": "Joystick1-C",
@@ -105,27 +105,27 @@
       },
       {
         "button": "Joystick1-LeftTrigger",
-        "file": "vocabulary/Alex/Hurt-200.wav"
-      },
-      {
-        "button": "Joystick1-LeftTrigger2",
-        "file": "vocabulary/Alex/Play-200.wav"
-      },
-      {
-        "button": "Joystick1-RightTrigger",
         "file": "vocabulary/Alex/Zulu-200.wav"
       },
       {
+        "button": "Joystick1-LeftTrigger2",
+        "file": "vocabulary/Alex/Happy-200.wav"
+      },
+      {
+        "button": "Joystick1-RightTrigger",
+        "file": "vocabulary/Alex/Tal-200.wav"
+      },
+      {
         "button": "Joystick1-RightTrigger2",
-        "file": "vocabulary/Alex/Food-200.wav"
+        "file": "vocabulary/Alex/Play-200.wav"
       },
       {
         "button": "Joystick1-Select",
-        "file": "vocabulary/Alex/Later-200.wav"
+        "file": "vocabulary/Alex/Potty-200.wav"
       },
       {
         "button": "Joystick1-Start",
-        "file": "vocabulary/Alex/Potty-200.wav"
+        "file": "vocabulary/Alex/Food-200.wav"
       },
       {
         "button": "Joystick1-Mode",
@@ -133,11 +133,11 @@
       },
       {
         "button": "Joystick1-LeftThumb",
-        "file": "vocabulary/Alex/Look-200.wav"
+        "file": "vocabulary/Alex/Come-200.wav"
       },
       {
         "button": "Joystick1-RightThumb",
-        "file": "vocabulary/Alex/Question-200.wav"
+        "file": "vocabulary/Alex/Bed-200.wav"
       },
       {
         "button": "Joystick1-DPadUp",
