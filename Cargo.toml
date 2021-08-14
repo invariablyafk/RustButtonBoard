@@ -9,3 +9,11 @@ edition = "2018"
 gilrs = "0.8.1"
 rodio = "0.14.0"
 serde_json = "1"
+
+[[bin]]
+name = "rust-speech-board"
+path = "./src/main.rs"
+
+[[bin]]
+name = "rust-speech-board-remapper"
+path = "./src/remapper.rs"
