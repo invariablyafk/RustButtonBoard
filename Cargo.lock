@@ -735,8 +735,10 @@ name = "rust-speech-board"
 version = "0.1.0"
 dependencies = [
  "gilrs",
+ "glob",
  "rodio",
  "serde_json",
+ "subprocess",
 ]
 
 [[package]]
@@ -920,6 +922,16 @@ name = "strsim"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6446ced80d6c486436db5c078dde11a9f73d42b57fb273121e160b84f63d894c"
+
+[[package]]
+name = "subprocess"
+version = "0.2.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "334b801f9ca2529ba9605109f1d2835f15aff94cd6cfe5afe6ce8cf71e5fd3c4"
+dependencies = [
+ "libc",
+ "winapi",
+]
 
 [[package]]
 name = "syn"
