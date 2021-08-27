@@ -9,21 +9,7 @@ use subprocess::{Exec, Popen};
 use std::process::exit;
 extern crate glob;
 use glob::glob;
-
-fn get_filename(button_name: &str, joystick_id: gilrs::GamepadId, vocabulary: &mut HashMap<String, String>) -> String {
-    let mut key = String::from("Joystick");
-    key.push_str( joystick_id.to_string().as_str() );
-    key.push_str("-");
-    key.push_str(button_name);
-    
-    
-    if vocabulary.contains_key(key.as_str()){ 
-        println!("Playing: {}", vocabulary.get(&key).unwrap().to_string());
-        return vocabulary.get(&key).unwrap().to_string();
-    } else {
-        return String::from("");
-    };
-}
+use std::time::{SystemTime, UNIX_EPOCH};
 
 fn speak_button_name(button_name: &str, joystick_id: gilrs::GamepadId) {
     let mut key = String::from("Joystick ");
@@ -42,24 +28,6 @@ fn speak(text: &str){
 
 fn main() -> Result<()> {
 
-    println!("Loading current vocabulary from words.json..");
-
-    let mut file = File::open("words.json").expect("Unable to open words.json");
-    let mut contents = String::new();
-    file.read_to_string(&mut contents).expect("Unable to open words.json"); //.ok();
-
-
-    // Parse the string of data into serde_json::Value.
-    let words_map: Vec<Value> = serde_json::from_str(&contents)?;
-
-    // Create hash Map to hold the word<->file mapping.
-    let mut vocabulary: HashMap<String, String> = HashMap::new();
-
-    for word in words_map {
-        println!("Loaded setting for word: {} --> {}", word["button"], word["file"]);
-        vocabulary.insert(String::from(word["button"].as_str().unwrap()), String::from(word["file"].as_str().unwrap()));
-    }
-
     // Gamepad Setup?
     let mut gilrs = Gilrs::new().unwrap();
 
@@ -68,25 +36,6 @@ fn main() -> Result<()> {
     for (_id, gamepad) in gilrs.gamepads() {
         println!("\t{}: {} is {:?}", _id, gamepad.name(), gamepad.power_info());
     }
-
-    // Word Files in Vocab Directory.
-    for e in glob("./vocabulary/Alex/*.wav").expect("Failed to find any *.wav files.") {
-        println!("Found audio file: {}", e.unwrap().display());
-    }
-
-    // std::process::exit(0x0100);
-
-    // let exit_status = (Exec::shell("echo").arg("Hello") | Exec::cmd("/usr/bin/festival").arg("--tts")).join();
-    // let exit_status = (Exec::cmd("/usr/bin/find . -type f") | Exec::cmd("/usr/bin/sort")).join();
-
-
-
-    // let exit_status = (Exec::cmd("find . -type f") | Exec::cmd("sort")).join()?;
-
-    // let paths = fs::read_dir("./").unwrap();
-    // for path in paths {
-    //     println!("File: {}", path.unwrap().path().display())
-    // }
 
     loop {
   
@@ -130,5 +79,7 @@ fn main() -> Result<()> {
 
         sink.sleep_until_end();
     }
+
+    std::process::exit(0x0100);
 
 }
